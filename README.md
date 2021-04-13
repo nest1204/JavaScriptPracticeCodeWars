@@ -1,5 +1,5 @@
 # JavaScriptPracticeCodeWars
 
+### JavaScript practice projects from CodeWars.com
 
-## All the projects in this repository are located in the "master" branch. 
-
+#### All the projects contain an empty HTML file.
