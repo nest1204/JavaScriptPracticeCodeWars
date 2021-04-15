@@ -1,8 +1,14 @@
+/*
+    So, we're going to sum every two numbers one-by-one from the end of the string 
+    and keeping a remainder for the next couple of numbers
+*/
+
 function add(a, b) {
     let aArr = a.split("");
     let bArr = b.split("");
     let numMain;
     let numExtra = 0;
+    let finalNumStr = "";
 
     // making arrays the same length
     while(aArr.length > bArr.length) {
@@ -13,8 +19,10 @@ function add(a, b) {
     }
 
     for(let i = aArr.length; i > 0; i--) {
-        // Problem here. Not sure what's wrong
-        let tempNum = (parseInt(aArr[i]) + parseInt(bArr[i]) + numExtra); //.toString();
+        // sum of two numbers and a remainder 
+        let tempNum = (parseInt(aArr[i - 1]) + parseInt(bArr[i - 1]) + parseInt(numExtra)).toString();
+        
+        // the first number array is going to be the number that is changing
         if(tempNum.length > 1) {
             numExtra = tempNum[0];
             numMain = tempNum[1];
@@ -23,30 +31,26 @@ function add(a, b) {
             numMain = tempNum[0];
         }
 
-        aArr[i] = numMain;
+        aArr[i - 1] = numMain;
 
-
-
-        
-
-        // if(i === 1 && numExtra !== 0) {
-
-        // }
+        // if the final number is 1 digit longer than the original, we're adding the last remainder in the front
+        if(i === 1 && numExtra !== 0) {
+            aArr.unshift(numExtra);
+            break;
+        }
         
     }
 
+    aArr.forEach(element => {
+        finalNumStr = finalNumStr + element;
+    });
 
-    console.log(aArr);
-    console.log(bArr);
-
-
+    return finalNumStr;
 }
-
 
 
 // Testing
 (function () {
-    console.assert(add("59", "49") === "108");
     console.assert(add("1", "1") === "2");
     console.assert(add("123", "456") === "579");
     console.assert(add("888", "222") === "1110");
